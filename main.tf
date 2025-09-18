@@ -39,8 +39,8 @@ resource "docker_container" "minecraft" {
   }
 
   volumes {
-    host_path = "${path.cwd}/data"
-    container_path = "/data"
+    host_path = "${path.cwd}/minecraft/data"
+    container_path = "/minecraft/data"
   }
   
   env = [
@@ -50,7 +50,8 @@ resource "docker_container" "minecraft" {
     "ONLINE_MODE=TRUE",           # Only allow premium accounts
     "MAX_PLAYERS=20",             # Max players
     "MOTD=Terraform Minecraft!",  # Server description
-    "TYPE=FORGE"                  # Forge serrver declaration
+    "TYPE=FORGE",                 # Forge serrver declaration
+    "ICON=/minecraft/data/clippy.png" # Image
   ]
 }
 
