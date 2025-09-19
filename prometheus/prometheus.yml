@@ -7,7 +7,7 @@ scrape_configs:
     static_configs:
       - targets: ['host.docker.internal:9323']
        
-  # - job_name: 'minecraft'
-  #   static_config:
-  #     - targets: ['localhost:9225']
+  - job_name: 'minecraft'
+    static_configs:
+      - targets: ['minecraft-server:9225']
       

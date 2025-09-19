@@ -33,13 +33,14 @@ resource "docker_container" "minecraft" {
     external = 25565
   }
 
+  # To expose exporter for prometheus
   ports {
     internal = 9225
     external = 9225
   }
 
   volumes {
-    host_path = "${path.cwd}/data"
+    host_path = "${path.cwd}/minecraft/data"
     container_path = "/data"
   }
   
@@ -76,8 +77,8 @@ resource "docker_container" "prometheus" {
   volumes {
     host_path      = "${path.cwd}/prometheus/prometheus.yml"
     container_path = "/etc/prometheus/prometheus.yml"
-    read_only      = true
   }
+
 }
 
 # Grafana image
