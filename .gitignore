@@ -3,3 +3,5 @@
 terraform.tfstate.backup
 .terraform.lock.hcl
 /.terraform
+/minecraft
+clippy.png
