@@ -52,7 +52,7 @@ resource "docker_container" "minecraft" {
     "MAX_PLAYERS=20",             # Max players
     "MOTD=Terraform Minecraft!",  # Server description
     "TYPE=FORGE",                 # Forge serrver declaration
-    "ICON=/minecraft/data/clippy.png" # Image
+    "ICON=/data/clippy.png" # Image
   ]
 }
 
@@ -106,19 +106,3 @@ resource "docker_container" "grafana" {
     container_path = "/etc/grafana/provisioning/"
   }
 }
-
-# resource "local_file" "grafana_datasource" {
-#   content = <<-EOT
-# apiVersion: 1
-
-# datasources:
-#   - name: Prometheus
-#     type: prometheus
-#     access: proxy
-#     url: http://prometheus:9090
-#     isDefault: true
-#     editable: true
-# EOT
-
-#   filename = "${path.cwd}\\grafana\\grafana-provisioning\\datasources\\prometheus.yml"
-# }
