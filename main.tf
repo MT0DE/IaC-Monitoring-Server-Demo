@@ -99,6 +99,11 @@ resource "docker_container" "grafana" {
     internal = 3000
     external = 3000
   }
+
+  volumes {
+    host_path      = "${path.cwd}/grafana/"
+    container_path = "/etc/grafana/provisioning/"
+  }
 }
 
 # resource "local_file" "grafana_datasource" {
