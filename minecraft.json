@@ -102,7 +102,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
+        "uid": "$datasource"
       },
       "fieldConfig": {
         "defaults": {
@@ -187,9 +187,9 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "$datasource"
           },
-          "expr": "up{application=\"$application\", instance=\"$instance\"}",
+          "expr": "up{job=\"$job\", instance=\"$instance\"}",
           "format": "time_series",
           "instant": true,
           "intervalFactor": 1,
@@ -267,7 +267,7 @@
           "datasource": {
             "uid": "$datasource"
           },
-          "expr": "time() - process_start_time_seconds{application=\"$application\", instance=\"$instance\"}",
+          "expr": "time() - process_start_time_seconds{job=\"$job\", instance=\"$instance\"}",
           "format": "time_series",
           "instant": true,
           "intervalFactor": 1,
@@ -350,7 +350,7 @@
           "datasource": {
             "uid": "$datasource"
           },
-          "expr": "process_start_time_seconds{application=\"$application\", instance=\"$instance\"}*1000",
+          "expr": "process_start_time_seconds{job=\"$job\", instance=\"$instance\"}*1000",
           "format": "time_series",
           "instant": true,
           "intervalFactor": 1,
@@ -428,7 +428,7 @@
           "datasource": {
             "uid": "$datasource"
           },
-          "expr": "label_join(jvm_info{application=\"$application\", instance=\"$instance\"}, \"jdk\", \", \", \"vendor\", \"runtime\", \"version\")",
+          "expr": "label_join(jvm_info{job=\"$job\", instance=\"$instance\"}, \"jdk\", \", \", \"vendor\", \"runtime\", \"version\")",
           "format": "table",
           "instant": true,
           "intervalFactor": 1,
@@ -512,7 +512,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "mc_player_list{application=\"$application\", instance=\"$instance\", name!=\"\"}",
+          "expr": "mc_player_list{job=\"$job\", instance=\"$instance\", name!=\"\"}",
           "format": "time_series",
           "instant": false,
           "interval": "0",
@@ -608,7 +608,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "mc_dimension_chunks_loaded{application=\"$application\", instance=\"$instance\"}",
+          "expr": "mc_dimension_chunks_loaded{job=\"$job\", instance=\"$instance\"}",
           "format": "time_series",
           "instant": false,
           "interval": "0",
@@ -659,7 +659,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "histogram_quantile(0.95, sum(rate(mc_server_tick_seconds_bucket{application=\"$application\", instance=\"$instance\"}[$__rate_interval])) by (le))",
+          "expr": "histogram_quantile(0.95, sum(rate(mc_server_tick_seconds_bucket{job=\"$job\", instance=\"$instance\"}[$__rate_interval])) by (le))",
           "format": "time_series",
           "instant": false,
           "interval": "0",
@@ -820,7 +820,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "clamp_max(1 / histogram_quantile(0.95, sum(rate(mc_server_tick_seconds_bucket{application=\"$application\", instance=\"$instance\"}[$__rate_interval])) by (le)), 20)",
+          "expr": "clamp_max(1 / histogram_quantile(0.95, sum(rate(mc_server_tick_seconds_bucket{job=\"$job\", instance=\"$instance\"}[$__rate_interval])) by (le)), 20)",
           "format": "time_series",
           "hide": false,
           "instant": false,
@@ -1082,7 +1082,7 @@
             "uid": "$datasource"
           },
           "editorMode": "code",
-          "expr": "jvm_memory_bytes_used{application=\"$application\", instance=\"$instance\", area=\"heap\"}",
+          "expr": "jvm_memory_bytes_used{job=\"$job\", instance=\"$instance\", area=\"heap\"}",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "Used",
@@ -1093,7 +1093,7 @@
           "datasource": {
             "uid": "$datasource"
           },
-          "expr": " jvm_memory_bytes_max{application=\"$application\", instance=\"$instance\", area=\"heap\"}",
+          "expr": " jvm_memory_bytes_max{job=\"$job\", instance=\"$instance\", area=\"heap\"}",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "Max",
@@ -1104,7 +1104,7 @@
             "uid": "$datasource"
           },
           "editorMode": "code",
-          "expr": "jvm_memory_bytes_committed{application=\"$application\", instance=\"$instance\", area=\"heap\"}",
+          "expr": "jvm_memory_bytes_committed{job=\"$job\", instance=\"$instance\", area=\"heap\"}",
           "format": "time_series",
           "hide": false,
           "intervalFactor": 1,
@@ -1244,7 +1244,7 @@
             "uid": "$datasource"
           },
           "editorMode": "code",
-          "expr": "jvm_memory_bytes_used{application=\"$application\", instance=\"$instance\", area=\"nonheap\"}",
+          "expr": "jvm_memory_bytes_used{job=\"$job\", instance=\"$instance\", area=\"nonheap\"}",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "Used",
@@ -1255,7 +1255,7 @@
           "datasource": {
             "uid": "$datasource"
           },
-          "expr": " jvm_memory_bytes_max{application=\"$application\", instance=\"$instance\", area=\"nonheap\"}",
+          "expr": " jvm_memory_bytes_max{job=\"$job\", instance=\"$instance\", area=\"nonheap\"}",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "Max",
@@ -1266,7 +1266,7 @@
             "uid": "$datasource"
           },
           "editorMode": "code",
-          "expr": "jvm_memory_bytes_committed{application=\"$application\", instance=\"$instance\", area=\"nonheap\"}",
+          "expr": "jvm_memory_bytes_committed{job=\"$job\", instance=\"$instance\", area=\"nonheap\"}",
           "format": "time_series",
           "hide": false,
           "intervalFactor": 1,
@@ -1365,7 +1365,7 @@
           "datasource": {
             "uid": "$datasource"
           },
-          "expr": "jvm_memory_pool_bytes_max{application=\"$application\", instance=\"$instance\",pool=\"PS Eden Space\"}",
+          "expr": "jvm_memory_pool_bytes_max{job=\"$job\", instance=\"$instance\",pool=\"PS Eden Space\"}",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
@@ -1378,7 +1378,7 @@
           "datasource": {
             "uid": "$datasource"
           },
-          "expr": "jvm_memory_pool_bytes_used{application=\"$application\", instance=\"$instance\",pool=\"PS Eden Space\"}",
+          "expr": "jvm_memory_pool_bytes_used{job=\"$job\", instance=\"$instance\",pool=\"PS Eden Space\"}",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
@@ -1391,7 +1391,7 @@
           "datasource": {
             "uid": "$datasource"
           },
-          "expr": "jvm_memory_pool_bytes_committed{application=\"$application\", instance=\"$instance\",pool=\"PS Eden Space\"}",
+          "expr": "jvm_memory_pool_bytes_committed{job=\"$job\", instance=\"$instance\",pool=\"PS Eden Space\"}",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
@@ -1491,7 +1491,7 @@
           "datasource": {
             "uid": "$datasource"
           },
-          "expr": "jvm_memory_pool_bytes_max{application=\"$application\", instance=\"$instance\",pool=\"Metaspace\"}",
+          "expr": "jvm_memory_pool_bytes_max{job=\"$job\", instance=\"$instance\",pool=\"Metaspace\"}",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
@@ -1504,7 +1504,7 @@
           "datasource": {
             "uid": "$datasource"
           },
-          "expr": "jvm_memory_pool_bytes_used{application=\"$application\", instance=\"$instance\",pool=\"Metaspace\"}",
+          "expr": "jvm_memory_pool_bytes_used{job=\"$job\", instance=\"$instance\",pool=\"Metaspace\"}",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
@@ -1517,7 +1517,7 @@
           "datasource": {
             "uid": "$datasource"
           },
-          "expr": "jvm_memory_pool_bytes_committed{application=\"$application\", instance=\"$instance\",pool=\"Metaspace\"}",
+          "expr": "jvm_memory_pool_bytes_committed{job=\"$job\", instance=\"$instance\",pool=\"Metaspace\"}",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
@@ -1617,7 +1617,7 @@
           "datasource": {
             "uid": "$datasource"
           },
-          "expr": "jvm_memory_pool_bytes_max{application=\"$application\", instance=\"$instance\",pool=\"Code Cache\"}",
+          "expr": "jvm_memory_pool_bytes_max{job=\"$job\", instance=\"$instance\",pool=\"Code Cache\"}",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
@@ -1630,7 +1630,7 @@
           "datasource": {
             "uid": "$datasource"
           },
-          "expr": "jvm_memory_pool_bytes_used{application=\"$application\", instance=\"$instance\",pool=\"Code Cache\"}",
+          "expr": "jvm_memory_pool_bytes_used{job=\"$job\", instance=\"$instance\",pool=\"Code Cache\"}",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
@@ -1643,7 +1643,7 @@
           "datasource": {
             "uid": "$datasource"
           },
-          "expr": "jvm_memory_pool_bytes_committed{application=\"$application\", instance=\"$instance\",pool=\"Code Cache\"}",
+          "expr": "jvm_memory_pool_bytes_committed{job=\"$job\", instance=\"$instance\",pool=\"Code Cache\"}",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
@@ -1744,7 +1744,7 @@
           "datasource": {
             "uid": "$datasource"
           },
-          "expr": "jvm_memory_pool_bytes_max{application=\"$application\", instance=\"$instance\",pool=\"Compressed Class Space\"}",
+          "expr": "jvm_memory_pool_bytes_max{job=\"$job\", instance=\"$instance\",pool=\"Compressed Class Space\"}",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
@@ -1757,7 +1757,7 @@
           "datasource": {
             "uid": "$datasource"
           },
-          "expr": "jvm_memory_pool_bytes_used{application=\"$application\", instance=\"$instance\",pool=\"Compressed Class Space\"}",
+          "expr": "jvm_memory_pool_bytes_used{job=\"$job\", instance=\"$instance\",pool=\"Compressed Class Space\"}",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
@@ -1770,7 +1770,7 @@
           "datasource": {
             "uid": "$datasource"
           },
-          "expr": "jvm_memory_pool_bytes_committed{application=\"$application\", instance=\"$instance\",pool=\"Compressed Class Space\"}",
+          "expr": "jvm_memory_pool_bytes_committed{job=\"$job\", instance=\"$instance\",pool=\"Compressed Class Space\"}",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
@@ -1870,7 +1870,7 @@
           "datasource": {
             "uid": "$datasource"
           },
-          "expr": "jvm_memory_pool_bytes_max{application=\"$application\", instance=\"$instance\",pool=\"PS Survivor Space\"}",
+          "expr": "jvm_memory_pool_bytes_max{job=\"$job\", instance=\"$instance\",pool=\"PS Survivor Space\"}",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
@@ -1883,7 +1883,7 @@
           "datasource": {
             "uid": "$datasource"
           },
-          "expr": "jvm_memory_pool_bytes_used{application=\"$application\", instance=\"$instance\",pool=\"PS Survivor Space\"}",
+          "expr": "jvm_memory_pool_bytes_used{job=\"$job\", instance=\"$instance\",pool=\"PS Survivor Space\"}",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
@@ -1896,7 +1896,7 @@
           "datasource": {
             "uid": "$datasource"
           },
-          "expr": "jvm_memory_pool_bytes_committed{application=\"$application\", instance=\"$instance\",pool=\"PS Survivor Space\"}",
+          "expr": "jvm_memory_pool_bytes_committed{job=\"$job\", instance=\"$instance\",pool=\"PS Survivor Space\"}",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
@@ -1996,7 +1996,7 @@
           "datasource": {
             "uid": "$datasource"
           },
-          "expr": "jvm_memory_pool_bytes_max{application=\"$application\", instance=\"$instance\",pool=\"PS Old Gen\"}",
+          "expr": "jvm_memory_pool_bytes_max{job=\"$job\", instance=\"$instance\",pool=\"PS Old Gen\"}",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
@@ -2009,7 +2009,7 @@
           "datasource": {
             "uid": "$datasource"
           },
-          "expr": "jvm_memory_pool_bytes_used{application=\"$application\", instance=\"$instance\",pool=\"PS Old Gen\"}",
+          "expr": "jvm_memory_pool_bytes_used{job=\"$job\", instance=\"$instance\",pool=\"PS Old Gen\"}",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
@@ -2022,7 +2022,7 @@
           "datasource": {
             "uid": "$datasource"
           },
-          "expr": "jvm_memory_pool_bytes_committed{application=\"$application\", instance=\"$instance\",pool=\"PS Old Gen\"}",
+          "expr": "jvm_memory_pool_bytes_committed{job=\"$job\", instance=\"$instance\",pool=\"PS Old Gen\"}",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
@@ -2088,7 +2088,7 @@
           "datasource": {
             "uid": "$datasource"
           },
-          "expr": "jvm_threads_current{application=\"$application\", instance=\"$instance\"}",
+          "expr": "jvm_threads_current{job=\"$job\", instance=\"$instance\"}",
           "format": "time_series",
           "intervalFactor": 5,
           "legendFormat": "JVM current threads",
@@ -2100,7 +2100,7 @@
           "datasource": {
             "uid": "$datasource"
           },
-          "expr": "jvm_threads_daemon{application=\"$application\", instance=\"$instance\"}",
+          "expr": "jvm_threads_daemon{job=\"$job\", instance=\"$instance\"}",
           "format": "time_series",
           "intervalFactor": 5,
           "legendFormat": "JVM daemon threads",
@@ -2112,7 +2112,7 @@
           "datasource": {
             "uid": "$datasource"
           },
-          "expr": "jvm_threads_deadlocked{application=\"$application\", instance=\"$instance\"}",
+          "expr": "jvm_threads_deadlocked{job=\"$job\", instance=\"$instance\"}",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "JVM deadlocked threads",
@@ -2237,7 +2237,7 @@
           "datasource": {
             "uid": "$datasource"
           },
-          "expr": "increase(jvm_gc_collection_seconds_sum{application=\"$application\", instance=\"$instance\"}[$__interval])",
+          "expr": "increase(jvm_gc_collection_seconds_sum{job=\"$job\", instance=\"$instance\"}[$__interval])",
           "format": "time_series",
           "interval": "60s",
           "intervalFactor": 1,
@@ -2302,7 +2302,7 @@
           "datasource": {
             "uid": "$datasource"
           },
-          "expr": "jvm_classes_currently_loaded{application=\"$application\", instance=\"$instance\"}",
+          "expr": "jvm_classes_currently_loaded{job=\"$job\", instance=\"$instance\"}",
           "format": "time_series",
           "interval": "60s",
           "intervalFactor": 1,
@@ -2429,7 +2429,7 @@
           "datasource": {
             "uid": "$datasource"
           },
-          "expr": "increase(jvm_gc_collection_seconds_count{application=\"$application\", instance=\"$instance\"}[$__interval])",
+          "expr": "increase(jvm_gc_collection_seconds_count{job=\"$job\", instance=\"$instance\"}[$__interval])",
           "format": "time_series",
           "interval": "60s",
           "intervalFactor": 1,
@@ -2494,7 +2494,7 @@
           "datasource": {
             "uid": "$datasource"
           },
-          "expr": "process_open_fds{application=\"$application\", instance=\"$instance\"}",
+          "expr": "process_open_fds{job=\"$job\", instance=\"$instance\"}",
           "format": "time_series",
           "interval": "60s",
           "intervalFactor": 1,
@@ -2568,16 +2568,16 @@
         "current": {},
         "datasource": {
           "type": "prometheus",
-          "uid": "${DS_PROMETHEUS}"
+          "uid": "$datasource"
         },
-        "definition": "label_values(mc_dimension_chunks_loaded, application)",
+        "definition": "label_values(mc_dimension_chunks_loaded{id=\"0\"}, job)",
         "hide": 0,
         "includeAll": false,
         "multi": false,
-        "name": "application",
+        "name": "job",
         "options": [],
         "query": {
-          "query": "label_values(mc_dimension_chunks_loaded, application)",
+          "query": "label_values(mc_dimension_chunks_loaded{id=\"0\"}, job)",
           "refId": "StandardVariableQuery"
         },
         "refresh": 1,
@@ -2590,16 +2590,16 @@
         "current": {},
         "datasource": {
           "type": "prometheus",
-          "uid": "${DS_PROMETHEUS}"
+          "uid": "$datasource"
         },
-        "definition": "label_values(mc_dimension_chunks_loaded{application=\"$application\"}, instance)",
+        "definition": "label_values(mc_dimension_chunks_loaded{job=\"$job\"}, instance)",
         "hide": 0,
         "includeAll": false,
         "multi": false,
         "name": "instance",
         "options": [],
         "query": {
-          "query": "label_values(mc_dimension_chunks_loaded{application=\"$application\"}, instance)",
+          "query": "label_values(mc_dimension_chunks_loaded{job=\"$job\"}, instance)",
           "refId": "StandardVariableQuery"
         },
         "refresh": 1,

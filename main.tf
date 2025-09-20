@@ -54,6 +54,9 @@ resource "docker_container" "minecraft" {
     "TYPE=FORGE",                 # Forge serrver declaration
     "ICON=/data/clippy.png" # Image
   ]
+  provisioner "local-exec" {
+    command = "docker cp ${path.cwd}/clippy.png ${self.id}:/data/clippy.png"
+  }
 }
 
 # Prometheus image
@@ -104,5 +107,10 @@ resource "docker_container" "grafana" {
   volumes {
     host_path      = "${path.cwd}/grafana/"
     container_path = "/etc/grafana/provisioning/"
+  }
+
+  //execute a (local) command for copying the minecraft.json configuration to grafana
+  provisioner "local-exec" {
+    command = "docker cp ${path.cwd}/minecraft.json ${self.id}:/etc/grafana/provisioning/dashboards/minecraft.json"
   }
 }
