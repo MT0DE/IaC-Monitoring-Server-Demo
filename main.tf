@@ -40,7 +40,7 @@ resource "docker_container" "minecraft" {
   }
 
   volumes {
-    host_path = "${path.cwd}/minecraft/data"
+    host_path      = "${path.cwd}/minecraft/data"
     container_path = "/data"
   }
   
@@ -52,11 +52,8 @@ resource "docker_container" "minecraft" {
     "MAX_PLAYERS=20",             # Max players
     "MOTD=Terraform Minecraft!",  # Server description
     "TYPE=FORGE",                 # Forge serrver declaration
-    "ICON=/data/clippy.png" # Image
+    "ICON=/data/clippy.png"       # Image
   ]
-  provisioner "local-exec" {
-    command = "docker cp ${path.cwd}/clippy.png ${self.id}:/data/clippy.png"
-  }
 }
 
 # Prometheus image
@@ -107,10 +104,5 @@ resource "docker_container" "grafana" {
   volumes {
     host_path      = "${path.cwd}/grafana/"
     container_path = "/etc/grafana/provisioning/"
-  }
-
-  //execute a (local) command for copying the minecraft.json configuration to grafana
-  provisioner "local-exec" {
-    command = "docker cp ${path.cwd}/minecraft.json ${self.id}:/etc/grafana/provisioning/dashboards/minecraft.json"
   }
 }
